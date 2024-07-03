@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO-LIST</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+         <h1>LISTA DE TAREAS</h1>
+        </header>
+        <main class="todo">
+            <div class="row">
+                <input type="text" id="inputBox" placeholder="Ingresa una nueva tarea">
+                <button id="addTaskButton">+</button>
+            </div>
+            <div class="counter-container">
+                <div id="task-counters">
+                  <span>Tareas Completadas:</span>
+                  <span id="completed-counter">0</span>
+                  <span>| Tareas sin completar:</span>
+                  <span id="uncompleted-counter">0</span>
+                </div>
+              </div>
+            <ul id="list-container">
+
+            </ul>
+            
+            <script src="./main.js"></script>
+        </main>
+        
+    </div>
+    
+</body>
+</html>
