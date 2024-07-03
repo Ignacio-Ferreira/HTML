@@ -32,7 +32,7 @@ const addTask = () => {
         updateCounters();
     });
 
-    // Agregar el checkbox y el texto al elemento de lista
+    // Agregar el checkbox , el texto al elemento de lista y el boton para eliminar
     listItem.appendChild(checkbox);
     listItem.appendChild(taskText);
     listItem.appendChild(deleteButton);
@@ -56,7 +56,7 @@ const updateCounters = () => {
     uncompletedCounter.textContent = taskList.children.length - completedTasks;
 };
 
-// Escuchar el evento click del botón para agregar una tarea
+// click del botón para agregar una tarea
 addTaskButton.addEventListener('click', addTask);
 
 // Función para marcar una tarea como completada o no completada
