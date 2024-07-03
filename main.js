@@ -4,7 +4,7 @@ const taskList = document.getElementById('list-container');
 const completedCounter = document.getElementById('completed-counter');
 const uncompletedCounter = document.getElementById('uncompleted-counter');
 
-// Función para agregar una nueva tarea
+//Funcion Agregar una nueva tarea
 const addTask = () => {
     const task = inputBox.value.trim();
     if (!task) {
@@ -12,7 +12,7 @@ const addTask = () => {
         return;
     }
 
-    // Crear un nuevo elemento de lista
+    // Crear elemento nuevo de la lista
     const listItem = document.createElement('li');
 
     // Crear un checkbox para marcar la tarea como completada
@@ -32,18 +32,18 @@ const addTask = () => {
         updateCounters();
     });
 
-    // Agregar el checkbox , el texto al elemento de lista y el boton para eliminar
+    // Agregar el checkbox , el texto y boton para eliminar el elemento
     listItem.appendChild(checkbox);
     listItem.appendChild(taskText);
     listItem.appendChild(deleteButton);
 
-    // Agregar la tarea a la lista
+    // Agregar la tarea 
     taskList.appendChild(listItem);
 
-    // Limpiar el cuadro de texto
+    // Limpiar el input
     inputBox.value = '';
 
-    // Actualizar los contadores
+    // Actualizar contador
     updateCounters();
 };
 
@@ -56,7 +56,7 @@ const updateCounters = () => {
     uncompletedCounter.textContent = taskList.children.length - completedTasks;
 };
 
-// click del botón para agregar una tarea
+// click en botón para agregar una tarea
 addTaskButton.addEventListener('click', addTask);
 
 // Función para marcar una tarea como completada o no completada
