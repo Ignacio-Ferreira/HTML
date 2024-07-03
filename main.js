@@ -14,14 +14,17 @@ const addTask = () => {
 
     // Crear elemento nuevo de la lista
     const listItem = document.createElement('li');
+    listItem.className='task-item';
 
     // Crear un checkbox para marcar la tarea como completada
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.className = 'task-checkbox';
     checkbox.addEventListener('change', updateCounters);
 
     // Crear un elemento de texto para la tarea
     const taskText = document.createElement('span');
+    taskText.className = 'task-text';
     taskText.textContent = task;
 
     const deleteButton = document.createElement('button');
