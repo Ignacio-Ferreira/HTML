@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imágenes del Chat</title>
+    <link rel="stylesheet" href="css/imagenes.css">
+</head>
+<body>
+    <h1 id="titulo-imagenes">Imágenes enviadas en el chat</h1>
+    <div id="imagenes-container">
+        <div id="imagenes-list"></div>
+    </div>
+
+    <script>
+        fetch('/imagenes') //Obtener imagenes
+            .then(response => response.json())
+            .then(data => {
+                const contenedor = document.getElementById('imagenes-list');
+                data.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `/images/${image}`;
+                    imgElement.classList.add('imagen'); // Clase imagen
+                    contenedor.appendChild(imgElement);
+                });
+            });
+    </script>
+</body>
+</html>
