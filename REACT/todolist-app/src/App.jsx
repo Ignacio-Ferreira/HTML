@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom'; // Eliminar Router
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { TodoForm } from './components/TodoForm';
 import { TodoList } from './components/TodoList';
 import { useState, useEffect } from 'react';
-import TodoDetail from './components/TodoDetail'; // Importa el componente de detalles de tareas
+import TodoDetail from './components/TodoDetail'; 
 
 function App() {
   const [todos, setTodos] = useState([]);

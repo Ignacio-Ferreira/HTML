@@ -7,7 +7,7 @@ const TodoList = ({ todos, handleSetComplete, handleDelete, handleEditTodo }) =>
     return (
         <div className="flex flex-col mt-6 rounded-lg overflow-hidden shadow-2xl">
             {todos.length === 0 ? (
-                <p className="text-center bg-gray-900 text-white py-4">No hay tareas pendientes</p>
+                <p className="text-center bg-gray-900 text-white py-4">No hay tareas activas</p>
             ) : (
                 <>
                     <p className="text-center bg-gray-900 text-white py-4">
