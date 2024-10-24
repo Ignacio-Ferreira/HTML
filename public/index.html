@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Online</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="chat-container">
+        <h1 id="titulo">CHAT EN TIEMPO REAL</h1>
+        <ul id="mensajes"></ul>
+        <div id="texto">
+            <input id="mensaje" autocomplete="off" placeholder="Escribir mensaje...">
+            <button id="Enviar">ENVIAR</button>
+            <input type="file" id="upload-image" style="display: none;">
+            <button id="custom-upload-button">ARCHIVO</button>
+            <button id="ver-imagenes" onclick="window.location.href='/ver-imagenes'">IMÁGENES</button>
+        </div>
+    </div>
+
+    <div id="notificacion" class="hidden"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Obtener el nombre de usuario desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const room = urlParams.get('room');
+
+        // Función para desplazar al último mensaje
+        function desplazarAlFinal() {
+            const mensajes = document.getElementById('mensajes');
+            mensajes.scrollTop = mensajes.scrollHeight;
+        }
+
+        // Activar el input de archivo cuando se hace clic en el botón "ARCHIVO"
+        document.getElementById('custom-upload-button').onclick = function() {
+            document.getElementById('upload-image').click();
+        };
+
+        // Subir imagen cuando se selecciona un archivo
+        document.getElementById('upload-image').onchange = function() {
+            const file = this.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(() => {
+                this.value = ''; // Limpiar el campo de input
+            });
+        };
+
+        // Enviar mensaje de texto con nombre de usuario
+        document.getElementById('Enviar').onclick = () => {
+            const mensaje = document.getElementById('mensaje').value;
+            if (mensaje) {
+                socket.emit('mensaje', { usuario: username, contenido: mensaje });
+                document.getElementById('mensaje').value = '';
+            }
+        };
+
+        // Mostrar mensajes recibidos con el nombre de usuario
+        socket.on('mensaje', (msg) => {
+            const item = document.createElement('li');
+            item.textContent = `${msg.usuario}: ${msg.contenido}`;
+            document.getElementById('mensajes').appendChild(item);
+            desplazarAlFinal();
+        });
+
+        // Mostrar imágenes recibidas
+        socket.on('imagen', (imageUrl) => {
+            const item = document.createElement('li');
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.style.maxWidth = '100%';
+            img.onload = () => { 
+                desplazarAlFinal();
+            };
+            item.appendChild(img);
+            document.getElementById('mensajes').appendChild(item);
+        });
+
+        // Mostrar notificaciones de texto o imagen
+        socket.on('notificacion', (mensaje) => {
+            mostrarNotificacion(mensaje);
+        });
+
+        // Mostrar notificación cuando un usuario se conecta
+        socket.on('usuario-conectado', (mensaje) => {
+            mostrarNotificacion(mensaje);
+        });
+
+        // Mostrar notificación cuando un usuario se desconecta
+        socket.on('usuario-desconectado', (mensaje) => {
+            mostrarNotificacion(mensaje);
+        });
+
+        // Función para mostrar la notificación temporalmente
+        function mostrarNotificacion(mensaje) {
+            const notificacion = document.getElementById('notificacion');
+            notificacion.textContent = mensaje;
+            notificacion.classList.remove('hidden');
+            setTimeout(() => {
+                notificacion.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
