@@ -46,6 +46,7 @@
             const file = this.files[0];
             const formData = new FormData();
             formData.append('image', file);
+            formData.append('usuario', username); // Agrega el nombre de usuario
 
             fetch('/upload', {
                 method: 'POST',
@@ -73,15 +74,38 @@
         });
 
         // Mostrar imágenes recibidas
-        socket.on('imagen', (imageUrl) => {
+        socket.on('imagen', (msg) => {
             const item = document.createElement('li');
+            
+            // Crea el elemento de texto para el nombre del usuario
+            const userText = document.createElement('strong');
+            userText.textContent = `${msg.usuario}: `;
+            item.appendChild(userText);
+            
+            // Crea el elemento de la imagen
             const img = document.createElement('img');
-            img.src = imageUrl;
+            img.src = msg.contenido;
             img.style.maxWidth = '100%';
             img.onload = () => { 
                 desplazarAlFinal();
             };
+            
+            // Crea el elemento de texto para la URL
+            const urlText = document.createElement('p');
+            urlText.textContent = msg.contenido; // Aquí usas la URL
+            urlText.style.fontSize = '12px'; // Opcional: ajustar tamaño de fuente
+            urlText.style.color = 'blue'; // Opcional: cambiar color del texto para parecer un enlace
+            urlText.style.cursor = 'pointer'; // Cambia el cursor a puntero para indicar clickeable
+            
+            // Agrega la funcionalidad para que al hacer clic en la URL se abra en una nueva pestaña
+            urlText.onclick = () => {
+                window.open(msg.contenido, '_blank');
+            };
+
+            // Agrega la imagen y la URL al item del chat
             item.appendChild(img);
+            item.appendChild(urlText);
+            
             document.getElementById('mensajes').appendChild(item);
         });
 

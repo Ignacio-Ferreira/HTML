@@ -24,7 +24,7 @@ function guardarHistorial() {
     fs.writeFileSync(historialArchivo, JSON.stringify(historial, null, 2));
 }
 
-// Configuracion de Multer para mandar imagenes
+// Configuración de Multer para mandar imágenes
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -66,10 +66,10 @@ aplicacion.get('/ver-imagenes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'imagenes.html'));
 });
 
-//Acceso a la carpeta uploads para ver las imagenes
+// Acceso a la carpeta uploads para ver las imágenes
 aplicacion.use('/images', express.static(path.join(__dirname, 'uploads')));
 
-//Login como pagina principal
+// Login como página principal
 aplicacion.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
@@ -80,7 +80,7 @@ aplicacion.get('/chat', (req, res) => {
     const room = req.query.room;
 
     if (!username || !room) {
-        return res.redirect('/'); //Si no pasan un nombre de usuario y un room no te manda al chat
+        return res.redirect('/'); // Si no pasan un nombre de usuario y un room no te manda al chat
     }
 
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -89,10 +89,10 @@ aplicacion.get('/chat', (req, res) => {
 // Ruta para subir imágenes
 aplicacion.post('/upload', upload.single('image'), (req, res) => {
     const imageUrl = `/images/${req.file.filename}`;
-    const mensaje = { tipo: 'imagen', contenido: imageUrl };
+    const mensaje = { tipo: 'imagen', usuario: req.body.usuario, contenido: imageUrl }; // Agregar usuario
     historial.push(mensaje);
     guardarHistorial();
-    io.emit('imagen', imageUrl);
+    io.emit('imagen', mensaje); // Emitir mensaje completo que incluye el usuario
     io.emit('notificacion', 'Un usuario ha enviado una imagen');
     res.status(200).send('Imagen subida con éxito');
 });
@@ -109,7 +109,7 @@ io.on('connection', (socket) => {
         if (mensaje.tipo === 'texto') {
             socket.emit('mensaje', { usuario: mensaje.usuario, contenido: mensaje.contenido });
         } else if (mensaje.tipo === 'imagen') {
-            socket.emit('imagen', mensaje.contenido);
+            socket.emit('imagen', mensaje);
         }
     });
 
