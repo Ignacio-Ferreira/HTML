@@ -92,12 +92,12 @@ aplicacion.post('/upload', upload.single('image'), (req, res) => {
     const mensaje = { tipo: 'imagen', usuario: req.body.usuario, contenido: imageUrl }; // Agregar usuario
     historial.push(mensaje);
     guardarHistorial();
-    io.emit('imagen', mensaje); // Emitir mensaje completo que incluye el usuario
+    io.emit('imagen', mensaje);
     io.emit('notificacion', 'Un usuario ha enviado una imagen');
     res.status(200).send('Imagen subida con éxito');
 });
 
-// Ruta para archivos estáticos (CSS, imágenes, etc.)
+// Ruta para archivos estáticos
 aplicacion.use(express.static(path.join(__dirname, 'public')));
 
 // Manejo de conexiones Socket.IO
@@ -116,7 +116,7 @@ io.on('connection', (socket) => {
     // Notificar a los demás usuarios cuando alguien se conecta
     socket.broadcast.emit('usuario-conectado', 'Un usuario se ha conectado');
 
-    // Manejar mensajes de texto
+    //mensajes de texto
     socket.on('mensaje', (data) => {
         const nuevoMensaje = { tipo: 'texto', usuario: data.usuario, contenido: data.contenido };
         historial.push(nuevoMensaje);
@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
         io.emit('notificacion', `${data.usuario} ha enviado un mensaje de texto`);
     });
 
-    // Manejar desconexiones
+    //desconexiones
     socket.on('disconnect', () => {
         console.log('Un usuario se desconectó');
         socket.broadcast.emit('usuario-desconectado', 'Un usuario se ha desconectado');

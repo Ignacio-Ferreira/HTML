@@ -92,10 +92,10 @@
             
             // Crea el elemento de texto para la URL
             const urlText = document.createElement('p');
-            urlText.textContent = msg.contenido; // Aquí usas la URL
-            urlText.style.fontSize = '12px'; // Opcional: ajustar tamaño de fuente
-            urlText.style.color = 'blue'; // Opcional: cambiar color del texto para parecer un enlace
-            urlText.style.cursor = 'pointer'; // Cambia el cursor a puntero para indicar clickeable
+            urlText.textContent = msg.contenido;
+            urlText.style.fontSize = '15px'; 
+            urlText.style.color = 'blue';
+            urlText.style.cursor = 'pointer';
             
             // Agrega la funcionalidad para que al hacer clic en la URL se abra en una nueva pestaña
             urlText.onclick = () => {

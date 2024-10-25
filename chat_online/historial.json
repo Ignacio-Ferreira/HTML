@@ -1,56 +1,67 @@
 [
   {
     "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "cdvdsv"
+    "usuario": "jose.ferreira",
+    "contenido": "Hola!"
   },
   {
     "tipo": "texto",
-    "usuario": "IgnacioFerreira",
+    "usuario": "Pedro",
+    "contenido": "Hola Ignacio"
+  },
+  {
+    "tipo": "texto",
+    "usuario": "Pedro",
+    "contenido": "Hola"
+  },
+  {
+    "tipo": "texto",
+    "usuario": "Pedro",
+    "contenido": "Como andas?"
+  },
+  {
+    "tipo": "texto",
+    "usuario": "Pedro",
+    "contenido": "dsvdsvds"
+  },
+  {
+    "tipo": "texto",
+    "usuario": "Pedro",
     "contenido": "dsvdsv"
   },
   {
     "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dsvds"
+    "usuario": "Pedro",
+    "contenido": "dsvsv"
   },
   {
     "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dsvds"
+    "usuario": "Milena Barbero",
+    "contenido": "Hola!"
   },
   {
     "tipo": "imagen",
-    "contenido": "/images/1729813257082.png"
-  },
-  {
-    "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dscdscs"
-  },
-  {
-    "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dscsdc"
-  },
-  {
-    "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dsdscsdc"
-  },
-  {
-    "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dscdsc"
+    "usuario": "jose.ferreira",
+    "contenido": "/images/1729821485718.png"
   },
   {
     "tipo": "imagen",
-    "usuario": "IgnacioFerreira",
-    "contenido": "/images/1729820219434.png"
+    "usuario": "Milena Barbero",
+    "contenido": "/images/1729821500014.png"
   },
   {
     "tipo": "texto",
-    "usuario": "IgnacioFerreira",
-    "contenido": "dcdscs"
+    "usuario": "Milena Barbero",
+    "contenido": "Hola! "
+  },
+  {
+    "tipo": "imagen",
+    "usuario": "Milena Barbero",
+    "contenido": "/images/1729821558504.png"
+  },
+  {
+    "tipo": "texto",
+    "usuario": "Pedro",
+    "contenido": "Hola!"
   }
 ]
